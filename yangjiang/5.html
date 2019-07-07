@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=no,width=device-width,initial-scale=1.0" />
+    <title>阳江科普游</title>
+    <link rel="stylesheet" href="css/5.css">
+    <link href="css/main-mobile.css?t=20181129_08" rel="stylesheet" type="text/css" />
+	<script src="jq/jquery-1.9.1.min.js"></script>
+    <script src="jq/jquery-pagination-boyue-0.1.1.js?t=20181127_02"></script>
+    <script src="jq/main-mobile.js?t=20181129_03"></script>
+    <style type="text/css"></style>
+</head>
+    <body>
+<div style="width: 100%; height: 50px; background: white; box-shadow: 0 2px 4px 0 rgba(0,0,0,.15); position: fixed; top: -1px; left: 0; z-index: 100;">
+    <div class="title-bar-box" style="padding: 3px 15px 0; line-height: 47px; position: relative;">
+        <!-- <div class="title-bar">
+            <a href="/mobile/main" style="color: #4e96ed; font-size: 22px;"><b>阳江科普游</b></a>
+            <div style="position: absolute; left: 130px; top: 3px;">
+                <a class="menu-item" href="/mobile/activity/list">活动公告</a>
+                <a class="menu-item" href="/mobile/selected/search">抽签结果查询</a>
+                <a class="menu-item" href="/mobile/journalism/list">活动报道</a>
+                <a class="menu-item" href="/mobile/resunit/list">资源单位</a>
+            </div>
+        </div> -->
+        <div >
+            <a style="font-size: 26px; position: absolute;" onclick="showLeftMenu()">≡</a>
+            <!-- <a style="color: #4e96ed; font-size: 22px; margin-left: 32px;"><b>阳江科普游</b></a> -->
+            <a style="color: #4e96ed; font-size: 22px; margin-left: 32px;"><b>阳江科普游</b></a>
+        </div>
+        <div style="font-size: 16px; position: absolute; right: 15px; top: 2px;">
+                    <!-- <a href="/mobile/login">登录</a>
+                    <a href="/mobile/register" style="margin-left: 5px;">注册</a> -->
+        </div>
+    </div>
+</div>
+
+
+
+<div id="cover-background" class="trans-backgorund" style="background-color:#666;opacity: 0.8;" onclick="hideCover();"></div>
+<!-- <div id="cover-background-trans" class="trans-backgorund-transparent" style="display: none;background-color:yellow;"></div> -->
+<div id="left-menu-box" style="background-color:#fff;" class="trans-left-menu left-menu-hide">
+    <div style="height: 50%; overflow: auto;">
+        <div id="left-menu">
+            <h3 class="p-title2" style="padding-left: 20px;">阳江科普游</h3>
+            <ul>
+                <li><a class="item-hover" href="1.html">首页</a></li>
+                <li><a class="item-hover" href="/mobile/activity/list">活动公告</a></li>
+                <li><a class="item-hover" href="/mobile/selected/search">抽签结果查询</a></li>
+                <li><a class="item-hover" href="/mobile/journalism/list">活动报道</a></li>
+                <li><a class="item-hover" href="/mobile/resunit/list">资源单位</a></li>
+            </ul>
+        </div>    
+    </div>
+</div>
+
+
+
+<div id="dialog-tip" class="shadow-box" style="display: none;"></div>
+<div id="dialog-confirm" class="shadow-box" style="display: none;">
+    <div class="content"></div>
+    <div class="btn-box" style="border-top: 1px solid #eee;">
+        <a onclick="hideCover()" style="border-right: 1px solid #eee; color: #888; border-radius: 0 0 0 4px;">取消</a><a onclick="confirmonPositive()" style="color: #4e96ed; border-radius: 0 0 4px 0;">确定</a>
+    </div>
+</div>
+<div id="main-content" style="padding-top: 50px;">
+<div class="main-div-3-b p-box">
+    <div style="text-align: center;">
+        <p class="p-title">阳江各城区资源单位997</p>
+        <img src="/dl/img/20181105111422741_643106.png" style="max-width: 100%;">
+        <p>所在区县：阳江</p>
+    </div>
+    <p class="p-title2">单位介绍</p>
+    <div></div>
+    <p class="p-title2">科普游自由行介绍</p>
+    <p>集合时间：11:00-13:00</p>
+    <p>集合地点：刀具城</p>
+    <p>电话：单位负责人</p>
+    <div></div>
+    <div style="padding-top: 20px; text-align: center;">
+        <a class="btn-input btn-select" onclick="history.go(-1);">返回</a>
+    </div>
+</div>
+<!-- <script type="text/javascript">
+
+    $(function () {
+        initLeftMenuSelectedItem("/mobile/resunit/list");
+    });
+</script></div> -->
+<script type="text/javascript">
+    function showCover() {
+        leftmenuShowable = false;
+        clearTimeout(coverTimer);
+        $('#cover-background').addClass('cover background-full-over');
+        $(document.body).css({
+            "overflow-y": "hidden"
+        });
+    }
+
+    var coverTimer;
+    var leftmenuShowable = true;
+    function hideCover() {
+        leftmenuShowable = true;
+        // $('#cover-background').removeClass('cover');
+        $('#left-menu-box').addClass('left-menu-hide');
+        // $("#dialog-tip").hide();
+        // $("#dialog-confirm").hide();
+        clearTimeout(coverTimer);
+        coverTimer = setTimeout(function () {
+            $('#cover-background').removeClass('background-full-over');
+            $(document.body).css({
+                "overflow-y": "auto"
+            });
+        }, 300);
+    }
+
+    function showLeftMenu() {
+        if (!leftmenuShowable) return;
+        $('#left-menu-box').removeClass('left-menu-hide');
+        showCover();
+    }
+
+    // function showTip(msg) {
+    //     $("#dialog-tip").show().text(msg);
+    //     showCover();
+    // }
+
+    // var onPositiveCallback;
+    // function showConfirm(msg,onPositiveBtn) {
+    //     $("#dialog-confirm").show();
+    //     $("#dialog-confirm .content").text(msg);
+    //     onPositiveCallback = onPositiveBtn;
+    //     showCover();
+
+    // }
+
+    // function confirmonPositive() {
+    //     onPositiveCallback();
+    //     hideCover();
+    // }
+
+    // 获取鼠标位置
+    // function mousePosition(ev){
+    //     if(ev.pageX || ev.pageY){
+    //         return {x:ev.pageX, y:ev.pageY};
+    //     }
+    //     return {
+    //         x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+    //         y:ev.clientY + document.body.scrollTop - document.body.clientTop
+    //     };
+    // }
+
+    // function touchPosition(ev) {
+    //     return {
+    //         x: ev.touches[0].clientX,
+    //         y: ev.touches[0].clientY
+    //     }
+    // }
+
+    // var isMouseActive;
+    // var startTouchPos;
+    // var mouseDelPos;
+    // $(function () {
+    //     document.ontouchmove = function(ev){
+    //         if (!isMouseActive) return;
+
+    //         var touchPos = touchPosition(ev);
+    //         var dx = touchPos.x - startTouchPos.x;
+    //         var dy = touchPos.y - startTouchPos.y;
+    //         if (Math.abs(dx) >=80 && Math.abs(dy) <=20) {
+    //             showLeftMenu();
+    //             isMouseActive = false;
+    //         }
+    //     }
+    //     document.ontouchstart = function(ev) {
+    //         var toucPos = touchPosition(ev);
+    //         if (toucPos.x > 120) return;
+    //         isMouseActive = true;
+    //         startTouchPos = toucPos;
+    //     };
+    //     document.ontouchend = function(ev) {
+    //         isMouseActive = false;
+    //     };
+    // });
+</script>
+</body>
+</html>

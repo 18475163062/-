@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="jq/jquery-1.9.1.min.js"></script>
+</head>
+<body>
+        <!-- <button onclick="turnPage('10.html')">微信</button>
+        <button onclick="turnPage('9.html')">通讯录</button>
+        <button onclick="turnPage('8.html')">找朋友</button>
+        <button onclick="turnPage('7.html')">我</button> -->
+    <div id="content" style="background: aqua;height: 300px; width: 210px">
+    你好</div>
+    <button onclick="turnPage('10.html')">微信</button>
+    <button onclick="turnPage('9.html')">通讯录</button>
+    <button onclick="turnPage('8.html')">找朋友</button>
+    <button id="waitWork" >我</button>
+    <script>
+        $("#waitWork").click(function(){
+
+var url = "http://192.168.0.96:8080/activity.html";
+
+var data = {type:1};
+
+$.ajax({
+
+ type : "get",
+
+ async : false, //同步请求
+
+ url : url,
+
+ data : data,
+
+ timeout:1000,
+
+ success:function(dates){
+
+ //alert(dates);
+
+ $("#content").html(dates);//要刷新的div
+
+ },
+
+ error: function() {
+
+       // alert("失败，请稍后再试！");
+
+     }
+
+});
+
+});
+        //  function turnPage(item){
+        //      var na = item; 
+        //         $.ajax({
+        //     url: "http://192.168.0.96:8080/"+ item,
+        //     // xhrFields: {withCredentials: true},
+        //     cache: false,
+        //     success: function(html){
+        //         $("#content").html(html);
+        //     }
+        // });
+        // }
+    </script>
+      <!-- <script>
+            function turnPage(nam){
+                var n = nam; 
+                   $.ajax({
+               url: "http://192.168.0.96:8080/"+ n,
+               // xhrFields: {withCredentials: true},
+               cache: false,
+               success: function(html){
+                   $("#content").html(html);
+               }
+           });
+           }
+       </script>
+             <script>
+                    function turnPage(na){
+                        var nn = na; 
+                           $.ajax({
+                       url: "http://192.168.0.96:8080/"+ nn,
+                       // xhrFields: {withCredentials: true},
+                       cache: false,
+                       success: function(html){
+                           $("#content").html(html);
+                       }
+                   });
+                   }
+               </script>
+                   <script>
+                        function turnPage(nam){
+                            var nn = nam; 
+                               $.ajax({
+                           url: "http://192.168.0.96:8080/"+ nn,
+                           // xhrFields: {withCredentials: true},
+                           cache: false,
+                           success: function(html){
+                               $("#content").html(html);
+                           }
+                       });
+                       }
+                   </script> -->
+    <!-- <script type="text/html" id="template">
+        <ul>
+            <li>姓名{{name}}</li>
+            <li>年龄{{age}}</li>
+            <li>电话{{phone}}</li>
+        </ul>
+    </script> -->
+    
+    <!-- <script>
+        // 获取数据
+        var data = {
+            name:"Ray",
+            age:"18",
+            phone:"18233989613"
+        };
+        
+        // 将数据放入模板中
+        var res = template("template", data);
+        console.log(res);
+    
+        // 将模板放入页面中
+        document.body.innerHTML = res;
+    
+    </script> -->
+    <!-- <script src="js/i.js"></script> -->
+</body>
+</html>

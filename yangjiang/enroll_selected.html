@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=320,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" /> 
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/enroll_selected.css">
+	<script src="jq/jquery-1.9.1.min.js"></script>
+	<script src="js/index.js"></script>
+<meta content="">   
+</head>
+<body>
+	<div class="container">
+		<div class="title">
+			<!-- <div id="moveDiv" style="width: 170px;text-align: left; background: #eee;height: 100vh;position: absolute;left: -210px;top: 0px;padding-left: 30px;">
+				<div>首页</div>
+				<div>活动公告</div>
+				<div>抽奖结果查询</div>
+				<div>活动报道</div>
+				<div>资源单位</div>
+			</div> -->
+			
+			<div class="title_1">
+				<div class="title_2_1">
+					<span class="title_span" style="font-size: 22px;font-weight: 12px; font-family: '微软雅黑';"><a id="btn" onclick="showLeftMenu()">≡</a></span>
+					<span  style="color: #4E96ED;padding-left: 5px; font-size: 24px;font-family: '微软雅黑'; font-weight: 12px;">阳江科普游</span>
+                </div>
+                
+                <div id="cover-background" class="trans-backgorund" style="background-color:#666;opacity: 0.8;" onclick="hideCover()"></div>
+				<!-- <div id="cover-background-trans" class="trans-backgorund-transparent" style="display: none;background-color:yellow;"></div> -->
+				<div id="left-menu-box" style="background-color:#fff;" class="trans-left-menu left-menu-hide">
+					<div style="height: 50%; overflow: auto;">
+						<div id="left-menu">
+                                <div> 阳江科普游</div>
+                                <div><a href="activity_gengduo.html">首页</a></div>
+                                <div><a href="activity.html">活动公告</a> </div>
+                                <div><a href="enroll_selected.html">抽奖结果查询</a></div>
+                                <div><a href="activity_journalism.html">活动报道</a></div>
+                                <div><a href="resunit.html">资源单位</a></div>
+                                <div onclick="clearAllCookie();">退出</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="title_2">
+					
+                        <span style="color: #4E96ED; font-size: 24px;font-family: '微软雅黑'; font-weight: 12px;"><a style="color:#4E96ED;" href="activity_gengduo.html">阳江科普游</a></span>
+                        <span class="title_span"><a href="activity.html">活动公告</a></span>
+					<span class="title_span"><a href="enroll_selected.html">抽签结果查询</a></span>
+					<span class="title_span"><a href="activity_journalism.html">活动报道</a></span>
+					<span class="title_span"><a href="resunit.html">资源单位</a></span>
+				</div>
+				<div class="title_3" id="uname">
+					<span><a href="login.html" >登录</a></span>
+					<span class="title_span" style="padding-right: 10px;"><a href="register.html" >注册</a></span>
+				</div>
+			</div>	
+		</div>
+	</div>
+	<div id="button" class="button" style="clear: both;" >
+        
+            <div class="button-span" ><span >抽取名单公示</span></div>
+            <div class="button-1" >
+                (名单公布后，请在确定时间内登录个人账号，并到个人中心进行确认是否参加活动。）
+            </div>
+            <div style="padding:0px 10px 0px 10px;">
+               <div style=" position: relative; padding-right: 103px; margin: 10px 0;">
+                    <form id="sousuo">
+                        <input class="input-text"  name="id_card"
+                    type="text" placeholder="请输入身份证号码"
+                     style="width: 100%;
+                      border-radius: 3px 0 0 3px;
+                      margin-right: 80px;">
+                    <a class="btn btn-simple-select-selected" onclick="sousuo()" 
+                    style="width: 80px; height: 32px; line-height: 32px; border-radius: 0 3px 3px 0;
+                     padding: 0; margin: 0; position: absolute; top: 0; right: 0;">搜索</a>
+                    </form>
+                
+            </div> 
+            </div>
+            
+            <!-- <div class="form" >
+                <form id="sousuo">
+                    <div class="form-content">
+                        <div class="form-c1">
+                            <input type="text" class="form-sou" placeholder="请输入身份证号码" name="id_card">
+                        </div>
+                        <div class="form-c2">
+                            <span class="form-a"> <a onclick="sousuo()" >搜 索</a></span>
+                        </div>
+                    
+                    </div>
+                    
+                </form> 
+            </div> -->
+    </div>
+    <div style="height:10px"></div>
+    <div id="button1" class="button1" >
+        <div>没找到相关数据</div> 
+    </div>
+    </div>
+    <script>
+            var userJsonStr = sessionStorage.getItem('user');
+            var userEntity = JSON.parse(userJsonStr);
+            var user_id =userEntity.uname;
+        document.getElementById("uname").innerHTML = user_id;
+    </script>
+    <script>
+        
+        function sousuo(){
+            $.ajax({
+                url:'http://192.168.0.140:8090/api/enroll/list/selected',
+                type: "get",
+                data: $("#sousuo").serialize(),   
+                dataType: "json",
+                cache: false,
+                xhrFields: {withCredentials: true},
+                success:function(result){
+                    if(result.code==200){
+                        initData(result.data);
+                    }
+                }
+            })
+        }
+        function initData(data){
+            var list=data.list;
+            var div_html="";
+            for(var i=0;i<list.length;i++){
+                div_html +="<div style='margin-bottom:10px;background:red;display: black;'>"+
+                            "<div>"+"活动名称："+ list[i].selected_route.activity.name + "</div>"+
+                            "<div>"+"真实姓名："+ list[i].realname + "</div>"+
+                            "<div>"+"路线："+ list[i].selected_route.res_unit.name + "</div>"+
+                            "<div>"+"身份证号码："+ list[i].id_card + "</div>"+
+                            "<div>"+"手机号："+ list[i].phone + "</div>"+
+                         "</div>";
+            }
+            $("#button1").html(div_html);
+        }
+    </script>
+</body>
+</html>

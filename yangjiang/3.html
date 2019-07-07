@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=320,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" /> 
+	<link rel="stylesheet" href="css/3.css">
+	<script src="jq/jquery-1.9.1.min.js"></script>
+	<script src="js/index.js"></script>
+<meta content="">   
+</head>
+<body>
+	<div class="container">
+		<div class="title">
+			<div id="left-menu-box" id="moveDiv" style="width: 170px;text-align: left; background: #eee;height: 100vh;position: absolute;left: -210px;top: 0px;padding-left: 30px;">
+				<div>首页</div>
+				<div>活动公告</div>
+				<div>抽奖结果查询</div>
+				<div>活动报道</div>
+				<div>资源单位</div>
+			</div>
+			
+			<div class="title_1">
+				<div class="title_2_1">
+					<span class="title_span" style="font-size: 22px;font-weight: 12px; font-family: '微软雅黑';"><a id="btn"  onclick="showLeftMenu()">≡</a></span>
+					<span  style="color: #4E96ED;padding-left: 5px; font-size: 24px;font-family: '微软雅黑'; font-weight: 12px;">阳江科普游</span>
+				</div>
+				<div class="title_2">
+					
+					<span style="color: #4E96ED; font-size: 24px;font-family: '微软雅黑'; font-weight: 12px;">阳江科普游</span>
+					<span class="title_span"><a href="#">活动公告</a></span>
+					<span class="title_span"><a href="#">抽签结果查询</a></span>
+					<span class="title_span"><a href="#">活动报道</a></span>
+					<span class="title_span"><a href="#">资源单位</a></span>
+				</div>
+				<div class="title_3" >
+					<span><a href="login.html" >登录</a></span>
+					<span class="title_span" style="padding-right: 10px;"><a href="register.html" >注册</a></span>
+				</div>
+			</div>	
+		</div>
+	</div>
+	<script>
+
+    function showCover() {
+        leftmenuShowable = false;
+        clearTimeout(coverTimer);
+        $('#cover-background').addClass('cover background-full-over');
+        $(document.body).css({
+            "overflow-y": "hidden"
+        });
+    }
+
+    var coverTimer;
+    var leftmenuShowable = true;
+    function hideCover() {
+        leftmenuShowable = true;
+        $('#cover-background').removeClass('cover');
+        $('#left-menu-box').addClass('left-menu-hide');
+        $("#dialog-tip").hide();
+        $("#dialog-confirm").hide();
+        clearTimeout(coverTimer);
+        coverTimer = setTimeout(function () {
+            $('#cover-background').removeClass('background-full-over');
+            $(document.body).css({
+                "overflow-y": "auto"
+            });
+        }, 300);
+    }
+
+    function showLeftMenu() {
+        if (!leftmenuShowable) return;
+        $('#left-menu-box').removeClass('left-menu-hide');
+        showCover();
+    }
+
+    function showTip(msg) {
+        $("#dialog-tip").show().text(msg);
+        showCover();
+    }
+
+    var onPositiveCallback;
+    function showConfirm(msg,onPositiveBtn) {
+        $("#dialog-confirm").show();
+        $("#dialog-confirm .content").text(msg);
+        onPositiveCallback = onPositiveBtn;
+        showCover();
+
+    }
+
+    function confirmonPositive() {
+        onPositiveCallback();
+        hideCover();
+    }
+
+    // 获取鼠标位置
+    function mousePosition(ev){
+        if(ev.pageX || ev.pageY){
+            return {x:ev.pageX, y:ev.pageY};
+        }
+        return {
+            x:ev.clientX + document.body.scrollLeft - document.body.clientLeft,
+            y:ev.clientY + document.body.scrollTop - document.body.clientTop
+        };
+    }
+
+    function touchPosition(ev) {
+        return {
+            x: ev.touches[0].clientX,
+            y: ev.touches[0].clientY
+        }
+    }
+
+    var isMouseActive;
+    var startTouchPos;
+    var mouseDelPos;
+    $(function () {
+        document.ontouchmove = function(ev){
+            if (!isMouseActive) return;
+
+            var touchPos = touchPosition(ev);
+            var dx = touchPos.x - startTouchPos.x;
+            var dy = touchPos.y - startTouchPos.y;
+            if (Math.abs(dx) >=80 && Math.abs(dy) <=20) {
+                showLeftMenu();
+                isMouseActive = false;
+            }
+        }
+        document.ontouchstart = function(ev) {
+            var toucPos = touchPosition(ev);
+            if (toucPos.x > 120) return;
+            isMouseActive = true;
+            startTouchPos = toucPos;
+        };
+        document.ontouchend = function(ev) {
+            isMouseActive = false;
+        };
+    });
+	</script>
+</body>
+</html>

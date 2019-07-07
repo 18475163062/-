@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8"/>
+<title>CSS Test Page</title>
+<style type="text/css">
+*{
+margin: 0;
+padding: 0;
+}
+.cent{
+background:#0CF; height:100px; width:100px;
+}
+.cs{
+width:100px;
+height:100px;
+background:#F09;
+/* top:50px;
+position:absolute; */
+opacity: 1;
+/* display: block; */
+/* font-size: 12px; */
+transition:height 3s;
+/* -webkit-transition: .8s;
+-moz-transition: .8s; */
+}
+.cent:hover .cs{
+    height:300px;
+color: #656e73;
+opacity: 0;
+}
+</style>
+
+</head>
+<body>
+
+<div class="cent">
+    This is the cent div
+        <div class="cs">
+            <p>this is a cs div</p>
+        </div>
+</div>
+
+</body>
+</html> 

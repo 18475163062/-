@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=320,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" /> 
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/activity_personal.css">
+	<script src="jq/jquery-1.9.1.min.js"></script>
+	<script src="js/index.js"></script>
+<meta content="">   
+</head>
+<body>
+	<div class="container">
+		<div class="title">
+			<!-- <div id="moveDiv" style="width: 170px;text-align: left; background: #eee;height: 100vh;position: absolute;left: -210px;top: 0px;padding-left: 30px;">
+				<div>首页</div>
+				<div>活动公告</div>
+				<div>抽奖结果查询</div>
+				<div>活动报道</div>
+				<div>资源单位</div>
+			</div>
+			 -->
+			<div class="title_1">
+				<div class="title_2_1">
+					<span class="title_span" style="font-size: 22px;font-weight: 12px; font-family: '微软雅黑';"><a id="btn" onclick="showLeftMenu()">≡</a></span>
+					<span  style="color: #4E96ED;padding-left: 5px; font-size: 24px;font-family: '微软雅黑'; font-weight: 12px;">阳江科普游</span>
+                </div>
+                
+                <div id="cover-background" class="trans-backgorund" style="background-color:#666;opacity: 0.8;" onclick="hideCover()"></div>
+				<!-- <div id="cover-background-trans" class="trans-backgorund-transparent" style="display: none;background-color:yellow;"></div> -->
+				<div id="left-menu-box" style="background-color:#fff;" class="trans-left-menu left-menu-hide">
+					<div style="height: 50%; overflow: auto;">
+						<div id="left-menu">
+                                <div> 阳江科普游</div>
+                                <div><a href="activity_gengduo.html">首页</a></div>
+                                <div><a href="activity.html">活动公告</a> </div>
+                                <div><a href="enroll_selected.html">抽奖结果查询</a></div>
+                                <div><a href="activity_journalism.html">活动报道</a></div>
+                                <div><a href="resunit.html">资源单位</a></div>
+                                <div onclick="clearAllCookie();">退出</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="title_2">
+                        <span style="color: #4E96ED; font-size: 24px;font-family: '微软雅黑'; font-weight: 12px;"><a style="color:#4E96ED;" href="activity_gengduo.html">阳江科普游</a></span>
+                        <span class="title_span"><a href="activity.html">活动公告</a></span>
+					<span class="title_span"><a href="enroll_selected.html">抽签结果查询</a></span>
+					<span class="title_span"><a href="activity_journalism.html">活动报道</a></span>
+					<span class="title_span"><a href="resunit.html">资源单位</a></span>
+				</div>
+				<div class="title_3" id="uname">
+					<span><a href="login.html" >登录</a></span>
+					<span class="title_span" style="padding-right: 10px;"><a href="register.html" >注册</a></span>
+				</div>
+			</div>	
+        </div>
+        <div id="button">
+            <div >
+                <span style="padding-left:20px;">
+                    <input type="button" class="but" value="添加">
+                </span>
+                <span><input type="button" onclick="delRow()" value="删除"></span> 
+            </div>
+            <div id="button1">
+
+            </div>
+            <div style="display:none; background: #4E96ED;width: 300px;height: 300px; text-align: center;margin: auto;" id="tijiao" class="tianjia">
+                    <form id='tijiao'>
+                            <!-- <div>
+                                <input type="hidden" name='user_id' value=''></div> -->
+                            <div>编号：<input type='text' id="serial_no" name='serial_no' value=''></div>
+                            <div>姓名：<input type='text' id="realname" name='realname' value=''></div>
+
+                            <div>性别：
+                                <input type='radio' id="gender" name='gender' checked='checked' value='1'>男
+                                <input type='radio' id="gender" name='gender'  value='2'>女</div>
+                            <div>身份证：
+                                <input type='text' id="id_card" name='id_card' value=''></div>
+                            <div>手机号码：
+                                <input type='text' id="phone" name='phone' value=''></div>
+                            
+                            <div>所属人群:
+                                <select id="belonging" name='belonging'>
+                                    <option value='0'></option>
+                                    <option value='1'>青少年</option>
+                                    <option value='2'>城镇劳动者</option>
+                                    <option value='3'>农村居民</option>
+                                    <option value='4'>领导干部和公务员</option>
+                                </select>
+                            </div>
+                           
+                            <!-- // "<div>"+
+                            //     "<span><a href='activity_personal.html'>"+ "报名"+"</a></span>"+
+                            //     "<span>"+ "返回"+"</span>"+
+                            // "</div>"+ -->
+                            <div><input type='button' onclick="tijiao()" value='提交'></div>
+                    </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        var userJsonStr = sessionStorage.getItem('user');
+            var userEntity = JSON.parse(userJsonStr);
+            var user_id =userEntity.uname;
+        document.getElementById("uname").innerHTML = user_id;
+    </script>
+	<script>
+        
+
+        $(document).ready(function(e){
+            $(".but").click(function(e){
+                $(".tianjia").toggle();
+            });
+        });
+
+        
+
+        function getQueryVariable(variable){
+            var query= window.location.search.substring(1);
+            var vars= query.split("&");
+            for(var i=0;i<vars.length;i++){
+                var pair = vars[i].split("=");
+                if(pair[0] == variable) return pair[1];
+            }
+        }
+        $(function(){
+            showActivity(getQueryVariable("id"))
+        })
+        
+        function showActivity(id){   
+                $.ajax({
+                    url:"http://192.168.0.140:8090/api/member/detail?id="+ id,
+                    type:"get",
+                    dataType:"json",
+                    cache:false,
+                    xhrFields: {withCredentials: true},
+                    // xhrFields: {
+                    //       withCredentials: true
+                    // },
+                        success:function(result){
+                           if(result.code == 200){
+                            
+                            var list =result.data;
+                            var tr_str="";
+                            tr_str +="<div>"+
+                                        "<form id='xiugai'>"+
+                                            "<div>"+ "<input type='hidden' name='id' value='"+list.id+"'>"+"</div>"+
+                                            "<div>"+"姓名："+ "<input type='text' name='realname' value='"+list.realname+"'>"+"</div>"+
+                                            "<div>"+ "性别："+
+                                                 "<input type='radio' name='gender' checked='checked' value='1'>"+"男"+
+                                                "<input type='radio' name='gender'  value='2'>"+"女"+"</div>"+
+                                            "<div>"+ "身份证："+ "<input type='text' name='id_card' value='"+ list.id_card +"'>"+"</div>"+
+                                            "<div>"+ "手机号码："+ "<input type='text' name='phone' value='"+list.phone+"'>" + "</div>"+
+                                            
+                                            "<div>"+ "所属人群:"+
+                                                "<select name='belonging'>"+
+                                                    "<option value='0'>"+list.belonging.desc+"</option>"+
+                                                    "<option value='1'>"+'青少年'+"</option>"+
+                                                    "<option value='2'>"+'城镇劳动者'+"</option>"+
+                                                    "<option value='3'>"+'农村居民'+"</option>"+
+                                                    "<option value='4'>"+'领导干部和公务员'+"</option>"+
+                                                "</select>"+
+                                            "</div>"+
+                                            // "<div>"+ "第一意向"+"<input type='text' value=''>" +"</div>"+
+                                            // "<div>"+ "第二意向"+"<input type='text' value=''>" + "</div>"+
+                                            // "<div>"+ "第三意向"+"<input type='text' value=''>" + "</div>"+
+                                            // "<div>"+
+                                            //     "<span><a href='activity_personal.html'>"+ "报名"+"</a></span>"+
+                                            //     "<span>"+ "返回"+"</span>"+
+                                            // "</div>"+
+                                            "<div><input type='button' onclick='xiugai()' value='修改'></div>"+
+                                            "<div><a href='javascript:history.go(-1)'>"+   '返回上一页'+ "</'a> </div>"+
+                                        "</form>"+
+                                     "<div>";
+                                $("#button1").html(tr_str);
+                           }
+                        }
+                    
+                });
+            }
+            
+            function xiugai(){
+                $.ajax({
+                    url:"http://192.168.0.140:8090/api/member/update",
+                    type:"post",
+                    dataType:"json",
+                    data:$('#xiugai').serialize(),
+                    cache:false,
+                    xhrFields: {withCredentials: true},
+                    error:function(result){},
+                    success:function(result){
+                        if(result.code == 200){
+                            alert(result.msg);
+                        }else{
+                            alert(result.msg);
+                        }
+                    }
+                })
+            }
+
+            function tijiao(){
+                var tijiao = document.getElementById("tijiao");
+                var userJsonStr = sessionStorage.getItem('user');
+                var userEntity = JSON.parse(userJsonStr);
+                var user_id =userEntity.id;
+                var serial_no = $("#serial_no").val();
+                var realname = $("#realname").val();
+                var gender = $("#gender").val();
+                var id_card = $("#id_card").val();
+                var phone = $("#phone").val();
+                var belonging = $("#belonging").val();
+                $.ajax({
+                    url:"http://192.168.0.140:8090/api/member/add",
+                    type:"post",
+                    data:{
+                        "user_id":user_id,"serial_no":serial_no,"realname":realname,"gender":gender,"id_card":id_card,
+                        "phone":phone,"belonging":belonging
+                    },
+                    dataType:"json",
+                    xhrFields: {withCredentials: true},
+                    success:function(result){
+                        if(result.code ==200){
+                            alert(result.msg);
+                            tijiao.style.display="none";
+                        }else{
+                            alert(result.msg);
+                            // tijiao.style.display="none";
+                        }
+                    }
+                })
+            }
+
+            
+                
+            
+
+            function delRow() {
+                var userJsonStr = sessionStorage.getItem('userid');
+                var userEntity = JSON.parse(userJsonStr);
+                var user_id =userEntity[0].id;
+                            $.ajax({
+                                url : "http://192.168.0.140:8090/api/member/delete?id=" + user_id, // 数据发送方式
+                                type : "post", // 接受数据格式           
+                                dataType : "json", // 要传递的数据
+                                xhrFields: {withCredentials: true},
+                                success : function(data) {
+                                    if (data.code == 200) {
+                                        alert(data.msg);
+                                      
+                                    } else {
+                                        alert(data.msg);
+                                    }
+                                }
+                            });
+                       
+                    } 
+                
+
+        </script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=320,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" /> 
+    <link rel="stylesheet" href="css/index.css">
+    <script src="jq/template-web.js"></script>
+    <script src="jq/jquery-1.9.1.min.js"></script>
+    
+    <script src="jq/jquery-pagination-boyue-0.0101.js"></script>
+    <script src="jq/main-mobile.js"></script>
+    <!-- <script src="js/index.js"></script> -->
+    <script src="js/index.js"></script>
+<meta content="">   
+</head>
+<body>
+	<div class="container">
+		<div class="title">
+			<!-- <div id="moveDiv" style="width: 170px;text-align: left; background: #eee;height: 100vh;position: absolute;left: -210px;top: 0px;padding-left: 30px;">
+				<div>首页</div>
+				<div>活动公告</div>
+				<div>抽奖结果查询</div>
+				<div>活动报道</div>
+				<div>资源单位</div>
+			</div> -->
+			
+			<div class="title_1">
+				<div class="title_2_1">
+					<span class="title_span" style="font-size: 22px;font-weight: 12px; font-family: '微软雅黑';"><a id="btn" onclick="showLeftMenu()">≡</a></span>
+					<span  style="color: #4E96ED;padding-left: 5px; font-size: 24px;font-family: '微软雅黑'; font-weight: 12px;">阳江科普游</span>
+                </div>
+                
+                <div id="cover-background" class="trans-backgorund" style="background-color:#666;opacity: 0.8;" onclick="hideCover()"></div>
+				<!-- <div id="cover-background-trans" class="trans-backgorund-transparent" style="display: none;background-color:yellow;"></div> -->
+				<div id="left-menu-box" style="background-color:#fff;" class="trans-left-menu left-menu-hide">
+					<div style="height: 50%; overflow: auto;">
+						<div id="left-menu">
+                                <div> 阳江科普游</div>
+                                <div><a href="activity_gengduo.html">首页</a></div>
+                                <div><a href="activity.html">活动公告</a> </div>
+                                <div><a href="enroll_selected.html">抽奖结果查询</a></div>
+                                <div><a href="activity_journalism.html">活动报道</a></div>
+                                <div><a href="resunit.html">资源单位</a></div>
+                                <div onclick="clearAllCookie();">退出</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="title_2">
+					
+                        <span style="color: #4E96ED; font-size: 24px;font-family: '微软雅黑'; font-weight: 12px;"><a style="color:#4E96ED;" href="activity_gengduo.html">阳江科普游</a></span>
+                        <span class="title_span"><a href="activity.html">活动公告</a></span>
+					<span class="title_span"><a href="enroll_selected.html">抽签结果查询</a></span>
+					<span class="title_span"><a href="activity_journalism.html">活动报道</a></span>
+					<span class="title_span"><a href="resunit.html">资源单位</a></span>
+				</div>
+				<div class="title_3" >
+					<!-- <span><a href="#" >登录</a></span> -->
+					<span class="title_span" style="padding-right: 10px;"><a href="register.html" >注册</a></span>
+				</div>
+			</div>	
+        </div>
+        <div class="main-div-3-b p-box">
+            <h3>用户登录</h3>
+            <form id="post-form">
+                <table class="table-list table-full">
+                    <tr>
+                        <td class="span1">用户名</td>
+                        <td><input id="uname-input" class="input-text-mobile" type="text" name="uname" ></td>
+                    </tr>
+                    <tr>
+                        <td>密码</td>
+                        <td>
+                            <input id="pwd-input" class="input-text-mobile" type="password" name="password" >
+                        </td>
+                    </tr>
+                </table>
+                <div style="padding: 10px 5px;">
+                    <a name="submit-btn" class="btn-input btn-select-custom" onclick="getPubKey()" style="width: 100%; margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0;">登录</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div>
+
+    </div>
+    <!-- <script type="text/javascript" id="template">
+        {{id}}
+    </script> -->
+<script src="jq/jsencrypt.min.js"></script>
+<script src="jq/cookie.js"></script>
+<script type="text/javascript" >
+
+    var submitBtn = $("#post-form a[name=submit-btn]");
+    var loginXhr;
+    function getPubKey() {
+        if (loginXhr != null) return;
+        loginXhr = $.ajax({
+            url: "http://192.168.0.140:8090/api/user/pubkey",
+            type: "post",
+            // data: urlEncode(getPartJson(item)),
+            dataType: "json",
+            cache: false,
+            xhrFields: {withCredentials: true},
+            // xhrFields:send(),
+            // crossDomain: true,
+            beforeSend: function () {
+                submitBtn.addClass("btn-submit");
+            },
+            complete: function () {
+            },
+            success: function (result) {
+                if (result.code == 200) {
+                    var encrypt = new JSEncrypt();
+                    encrypt.setPublicKey(result.data);
+                    var encryptPwd = encrypt.encrypt($("#pwd-input").val());
+                    // var JSESSIONID = result.JSESSIONID;
+                    // var value = result.value;
+                    // cookie_data1 = {
+                    //     "data":{
+                    //         "JSESSIONID":JSESSIONID,
+                    //         "value":value
+                    //     }
+                    // };
+                    // setCookie('JSESSIONID',cookie_data1,'m5');
+
+                    login(encryptPwd);
+                } else {
+                    alert(result.msg);
+                }
+
+            }, error: function (result) {
+                alert("网络连接失败");
+                loginXhr = null;
+                submitBtn.removeClass("btn-submit");
+            }
+        });
+    }
+
+    function login(encryptPwd) {
+        loginXhr = $.ajax({
+            url: "http://192.168.0.140:8090/api/user/login",
+            type: "post",
+            data: "uname=" + $("#uname-input").val() + "&password=" + encodeURI(encryptPwd).replace(/\+/g, '%2B'),
+            dataType: "json",
+            cache: false,
+            // headers: {
+	        //       'token' : 'token'
+	        //   },
+         //    beforeSend: function(request) {
+         //      	// request.setRequestHeader("Authorization", token);
+         //      	request.setRequestHeader("token","header-token-value");
+         //      	 request.setRequestHeader("dingyi","header-dingyi-value"); 
+         //      	 request.send();
+	        // },
+
+            xhrFields: {withCredentials: true},
+            beforeSend: function () {
+            },
+            complete: function () {
+                loginXhr = null;
+            },
+            success: function (result) {
+              
+                if (result.code == 200) {
+                    alert(result.msg);
+                    var list = result.data;
+                   
+                //  var userEntity1 = JSON.stringify(list)
+                //  var user_id = JSON.parse(userEntity1);
+                // var user =userEntity.id;
+                //   var userEntity = JSON.parse(userEntity1);
+                    // var ii = userEntity1.id;
+                    // var res = template("template", user_id);
+                    // console.log(res);
+// 将模板放入页面中
+                    // var o = res;
+                    // document.body.innerHTML = res;
+
+                    // var jsonid = JSON.parse(list.id);
+
+                    // var u_id=JSON.stringify(jsonid);
+
+                    // localStorage.setItem("id",u_id,"30S");
+                    sessionStorage.setItem('user', JSON.stringify(list));
+                    window.location.href = "activity.html";
+                    // var backUrl = getQueryVariable("back_url");
+                } else {
+                    alert(result.msg);
+                }
+            }, error: function (result) {
+                alert("网络连接失败");
+            }
+        });
+    }
+</script>
+</body>
+</html>

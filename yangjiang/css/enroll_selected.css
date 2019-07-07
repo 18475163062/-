@@ -1,0 +1,386 @@
+#button{
+    background-color: #fff;
+}
+.button-span{
+    padding-top: 30px;
+    padding-bottom: 10px; 
+    color:#4E96ED;
+    font-weight: 400;
+    text-align: center;
+    font-size: 22px;
+}
+@media only screen and (max-width: 340px) {
+    .button{
+        width: 100%;
+        margin: auto;
+    }
+    .button1{
+        width: 100%;
+        margin: auto;
+        background-color: #fff; 
+        text-align: center;
+        height: 300px;
+        /* line-height: 300px; */
+    }
+    .button-1{
+        margin: auto;
+        width: 95%;
+        text-align: center;
+        padding-bottom: 10px;
+        /* background-color: #4E96ED; */
+    }
+    .form{
+        width: 100%;
+        text-align: center;
+        padding-bottom: 30px;
+    }
+    .form-content{
+        margin: auto;
+        width: 95%;
+        height: 30px;
+        background: red;
+    }
+    .form-c1{
+        margin: auto;
+        width: 70%;
+        float: left;
+        height: 34px;
+        
+        background: red;
+    }
+    .form-c2{
+        margin: auto;
+        float: left;
+        height: 34px;
+        min-width: 30%;
+        background: #4E96ED;
+        
+    }
+    .form-sou{
+        margin: auto;
+        width: 100%;
+        height: 31px;
+        border: 2px solid #4E96ED;
+    }
+    .form-a{
+        width: 100%;
+        /* padding-top: 8px;
+        padding-bottom: 8px;*/
+        padding-left: 15px;
+        padding-right: 15px; 
+        height: 30px;
+        border: 2px solid #4E96ED;
+        background: #4E96ED;
+
+    }
+}
+@media screen and (min-width: 341px) and (max-width: 620px) {
+    .button{
+        width: 100%;
+        margin: auto;
+    }
+    .button1{
+        width: 100%;
+        margin: auto;
+        background-color: #fff; 
+        text-align: center;
+        height: 300px;
+        /* line-height: 300px; */
+    }
+    .button-1{
+        margin: auto;
+        width: 95%;
+        text-align: center;
+        padding-bottom: 10px;
+        /* background-color: #4E96ED; */
+    }
+    .form{
+        width: 100%;
+        text-align: center;
+        padding-bottom: 30px;
+    }
+    .form-content{
+        margin: auto;
+        width: 95%;
+        height: 30px;
+        background: red;
+    }
+    .form-c1{
+        margin: auto;
+        width: 75%;
+        float: left;
+        height: 34px;
+        
+        background: red;
+    }
+    .form-c2{
+        margin: auto;
+        float: left;
+        height: 34px;
+        width: 25%;
+        background: #4E96ED;
+        
+    }
+    .form-sou{
+        margin: auto;
+        width: 100%;
+        height: 31px;
+        border: 2px solid #4E96ED;
+    }
+    .form-a{
+        width: 100%;
+        /* padding-top: 8px;
+        padding-bottom: 8px;*/
+        padding-left: 15px;
+        padding-right: 15px; 
+        height: 30px;
+        border: 2px solid #4E96ED;
+        background: #4E96ED;
+
+    }
+}
+@media screen and (min-width: 621px) and (max-width: 780px){
+    .button{
+        
+        width: 100%;
+        margin: auto;
+    }
+    .button1{
+        width: 100%;
+        margin: auto;
+        background-color: #fff; 
+        text-align: center;
+        height: 300px;
+        /* line-height: 300px; */
+    }
+    .button-1{
+        margin: auto;
+        width: 95%;
+        text-align: center;
+        padding-bottom: 10px;
+        /* background-color: #4E96ED; */
+    }
+    .form{
+        width: 100%;
+        text-align: center;
+        padding-bottom: 30px;
+    }
+    .form-content{
+        margin: auto;
+        width: 95%;
+        height: 30px;
+        background: red;
+    }
+    .form-c1{
+        margin: auto;
+        width: 85%;
+        float: left;
+        height: 34px;
+        
+        background: red;
+    }
+    .form-c2{
+        margin: auto;
+        float: left;
+        height: 34px;
+        width: 15%;
+        background: #4E96ED;
+        
+    }
+    .form-sou{
+        margin: auto;
+        width: 100%;
+        height: 31px;
+        border: 2px solid #4E96ED;
+    }
+    .form-a{
+        width: 100%;
+        /* padding-top: 8px;
+        padding-bottom: 8px;*/
+        padding-left: 15px;
+        padding-right: 15px; 
+        height: 30px;
+        border: 2px solid #4E96ED;
+        background: #4E96ED;
+
+    }
+}
+@media screen and (min-width: 781px) and (max-width: 1100px){
+      .button{
+  
+        width: 100%;
+        margin: auto;
+    }
+    .button1{
+        width: 100%;
+        margin: auto;
+        background-color: #fff; 
+        text-align: center;
+        height: 300px;
+        /* line-height: 300px; */
+    }
+    .button-1{
+        margin: auto;
+        width: 95%;
+        text-align: center;
+        padding-bottom: 10px;
+        /* background-color: #4E96ED; */
+    }
+    .form{
+        width: 100%;
+        text-align: center;
+        padding-bottom: 30px;
+    }
+    .form-content{
+        margin: auto;
+        width: 95%;
+        height: 30px;
+        background: red;
+    }
+    .form-c1{
+        margin: auto;
+        width: 90%;
+        float: left;
+        height: 34px;
+        
+        background: red;
+    }
+    .form-c2{
+        margin: auto;
+        float: left;
+        height: 34px;
+        width: 10%;
+        background: #4E96ED;
+        
+    }
+    .form-sou{
+        margin: auto;
+        width: 100%;
+        height: 31px;
+        border: 2px solid #4E96ED;
+    }
+    .form-a{
+        width: 100%;
+        /* padding-top: 8px;
+        padding-bottom: 8px;*/
+        padding-left: 15px;
+        padding-right: 15px; 
+        height: 30px;
+        border: 2px solid #4E96ED;
+        background: #4E96ED;
+
+    }
+}
+@media screen and (min-width: 1101px) {
+    .button{
+        width: 800px; 
+        margin: auto;
+    }
+    .button1{
+        margin: auto;
+        width: 800px;
+        background-color: #fff; 
+        text-align: center;
+        height: 300px;
+        /* line-height: 300px; */
+    }
+    .button-1{
+        margin: auto;
+        /* background-color: #4E96ED; */
+        width: 95%;
+        text-align: center;
+        padding-bottom: 10px;
+    }
+    .form{
+        background: red;
+        /* position: absolute; */
+        margin: auto;
+        width: 800px;
+        text-align: center;
+        padding-bottom: 30px;
+    }
+    .form-content{
+        margin: auto;
+        width: 95%;
+        height: 30px;
+        background: red;
+    }
+    .form-c1{
+        margin: auto;
+        width: 90%;
+        float: left;
+        height: 34px;
+        
+        background: red;
+    }
+    .form-c2{
+        margin: auto;
+        float: left;
+        height: 34px;
+        width: 10%;
+        background: #4E96ED;
+        
+    }
+    .form-sou{
+        margin: auto;
+        width: 100%;
+        height: 31px;
+        border: 2px solid #4E96ED;
+    }
+    .form-a{
+        width: 100%;
+        /* padding-top: 8px;
+        padding-bottom: 8px;*/
+        padding-left: 15px;
+        padding-right: 15px; 
+        height: 30px;
+        border: 2px solid #4E96ED;
+        background: #4E96ED;
+
+    }
+    /* .form-a{
+        position: relative;
+        left: -30px;
+        padding: 6px;
+        width: 20%;
+        height: 30px;
+        background: #4E96ED;
+
+    } */
+    /* .form-sou{
+        border: 1px solid #000;
+        width: 700px;
+    } */
+}
+.input-text {
+
+    width: 280px;
+    height: 32px;
+    padding: 0 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    line-height: 32px;
+
+}
+a.btn-simple-select-selected:hover, a.btn-simple-select-selected:active {
+
+    background: #54a1ff;
+
+}
+a.btn-simple-select-selected {
+
+    color: white;
+    border: 1px solid #4e96ed;
+    background: #4e96ed;
+
+}
+a.btn, a.btn-simple {
+
+    font-size: 14px;
+    line-height: 14px;
+    padding: 5px 8px;
+    border-radius: 3px;
+    text-align: center;
+    margin: 0 5px;
+
+}

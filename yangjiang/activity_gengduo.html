@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=320,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" /> 
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/activity.css">
+	<script src="jq/jquery-1.9.1.min.js"></script>
+	<script src="js/index.js"></script>
+<meta content="">   
+</head>
+<body>
+	<div class="container">
+		<div class="title">
+			<!-- <div id="moveDiv" style="width: 170px;text-align: left; background: #eee;height: 100vh;position: absolute;left: -210px;top: 0px;padding-left: 30px;">
+				<div>首页</div>
+				<div>活动公告</div>
+				<div>抽奖结果查询</div>
+				<div>活动报道</div>
+				<div>资源单位</div>
+			</div> -->
+			
+			<div class="title_1">
+				<div class="title_2_1">
+					<span class="title_span" style="font-size: 22px;font-weight: 12px; font-family: '微软雅黑';"><a id="btn" onclick="showLeftMenu()">≡</a></span>
+					<span  style="color: #4E96ED;padding-left: 5px; font-size: 24px;font-family: '微软雅黑'; font-weight: 12px;">阳江科普游</span>
+                </div>
+                
+                <div id="cover-background" class="trans-backgorund" style="background-color:#666;opacity: 0.8;" onclick="hideCover()"></div>
+				<!-- <div id="cover-background-trans" class="trans-backgorund-transparent" style="display: none;background-color:yellow;"></div> -->
+				<div id="left-menu-box" style="background-color:#fff;" class="trans-left-menu left-menu-hide">
+					<div style="height: 50%; overflow: auto;">
+						<div id="left-menu">
+                                <div> 阳江科普游</div>
+                                <div><a href="activity_gengduo.html">首页</a></div>
+                                <div><a href="activity.html">活动公告</a> </div>
+                                <div><a href="enroll_selected.html">抽奖结果查询</a></div>
+                                <div><a href="activity_journalism.html">活动报道</a></div>
+                                <div><a href="resunit.html">资源单位</a></div>
+                                <div onclick="clearAllCookie();">退出</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="title_2">
+                        <span style="color: #4E96ED; font-size: 24px;font-family: '微软雅黑'; font-weight: 12px;"><a style="color:#4E96ED;" href="activity_gengduo.html">阳江科普游</a></span>
+                        <span class="title_span"><a href="activity.html">活动公告</a></span>
+					<span class="title_span"><a href="enroll_selected.html">抽签结果查询</a></span>
+					<span class="title_span"><a href="activity_journalism.html">活动报道</a></span>
+					<span class="title_span"><a href="resunit.html">资源单位</a></span>
+				</div>
+				<div class="title_3" id="uname">
+					<span><a href="login.html" >登录</a></span>
+					<span class="title_span" style="padding-right: 10px;"><a href="register.html" >注册</a></span>
+				</div>
+			</div>	
+        </div>
+        <div id="button">
+
+        </div>
+    </div>
+    <script>
+        var userJsonStr = sessionStorage.getItem('user');
+            var userEntity = JSON.parse(userJsonStr);
+            var user_id =userEntity.uname;
+        document.getElementById("uname").innerHTML = user_id;
+    </script>
+    <script>
+       
+
+        $(function(){
+            getData(1);
+        });
+        function getData(page_num){
+            var _data = "";
+            $.ajax({
+                url:"http://192.168.0.140:8090/api/activity/list",
+                type:"get",
+                dataType:"json",
+                cache:false,
+                data:_data,
+                success:function(result){
+                    if(result.code=200){
+                        initData(result.data);
+                    }
+                }
+            })
+        }
+        function initData(data){
+            var list = data.list;
+                    var tr_str ="<div class='button_top'>"+
+                                    "<div class='button_3'>"+ '科普游活动报名列表'+"</div>"+
+                                "</div>"; 
+                         
+            for(var i = 0;i<list.length;i++){
+                tr_str +="<div class='button_top' data-id='"+list[i].id +"' >"+
+                            "<div class='button_1'><a onclick='showActivity(this)'>"+ list[i].name+"</a></div>"+
+                            "<div class='button_2'>"+ list[i].exp_time+"</div>"+
+                         "</div>";
+            }
+            $("#button").html(tr_str);
+        }
+    </script>
+    <script>
+        function showActivity(item){
+            window.location.href = "activity_detail.html?id="+$(item).closest(".button_top").data("id");
+            return;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+body{
+    background-color: aqua;
+}
+#button{
+    width: 1100px;
+    text-align: center;
+    margin: auto;
+}
+.list-l1{
+    float: left;
+    width: 20%;
+    margin-bottom: 15px;
+        /*background: pink;*/
+}
+    
+
+
+
+
+.list-l2{ 
+    width: 100%;	
+}
+.list-l3:hover{
+    box-shadow:0px 7px 7px rgba(0,0,0,0.5);
+    margin-right:15px;
+    margin-left: 15px;
+    
+}
+.list-l3{
+    box-shadow:0px 3px 3px rgba(0,0,0,0.4);
+    margin-right:15px;
+    margin-left: 15px;
+    
+}
+.list-l4{
+    padding-bottom:62.5%;
+    position: relative;	
+}
+.list-l5{
+    margin-left:25px;
+    /*display:inline-block;*/
+    overflow: hidden;
+    margin:auto 0px auto 15px;
+    white-space: nowrap;
+
+}
+.tu{
+    max-width: 100%;
+    max-height: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    
+}

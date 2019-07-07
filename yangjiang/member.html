@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<meta name="viewport" content="width=320,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" /> 
+	<link rel="stylesheet" href="css/index.css">
+	<script src="jq/jquery-1.9.1.min.js"></script>
+	<script src="js/index.js"></script>
+<meta content="">   
+<style>
+    .button_top{
+        margin-bottom: 10px;
+        background-color: red;
+    }
+</style>
+</head>
+<body>
+	<div class="container">
+		<div class="title">
+			<div class="title_1">
+				<div class="title_2_1">
+					<span class="title_span" style="font-size: 22px;font-weight: 12px; font-family: '微软雅黑';"><a id="btn"  onclick="showLeftMenu()">≡</a></span>
+					<span  style="color: #4E96ED;padding-left: 5px; font-size: 24px;font-family: '微软雅黑'; font-weight: 12px;">阳江科普游</span>
+				</div>
+
+				<div id="cover-background" class="trans-backgorund" style="background-color:#666;opacity: 0.8;" onclick="hideCover()"></div>
+				<!-- <div id="cover-background-trans" class="trans-backgorund-transparent" style="display: none;background-color:yellow;"></div> -->
+				<div id="left-menu-box" style="background-color:#fff;" class="trans-left-menu left-menu-hide">
+					<div style="height: 50%; overflow: auto;">
+						<div id="left-menu">
+								<div> 阳江科普游</div>
+								<div><a href="activity_gengduo.html">首页</a></div>
+								<div><a href="activity.html">活动公告</a> </div>
+								<div><a href="enroll_selected.html">抽奖结果查询</a></div>
+								<div><a href="activity_journalism.html">活动报道</a></div>
+								<div><a href="resunit.html">资源单位</a></div>
+								<div onclick="clearAllCookie();">退出</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="title_2">
+					<span style="color: #4E96ED; font-size: 24px;font-family: '微软雅黑'; font-weight: 12px;"><a style="color:#4E96ED;" href="activity_gengduo.html">阳江科普游</a></span>
+					<span class="title_span"><a href="activity.html">活动公告</a></span>
+					<span class="title_span"><a href="enroll_selected.html">抽签结果查询</a></span>
+					<span class="title_span"><a href="activity_journalism.html">活动报道</a></span>
+					<span class="title_span"><a href="resunit.html">资源单位</a></span>
+				</div>
+				<div class="title_3" >
+					<span><a href="login.html" >登录</a></span>
+					<span class="title_span" style="padding-right: 10px;"><a href="register.html" >注册</a></span>
+				</div>
+			</div>	
+        </div>
+        
+        <div id="button" style="clear: both;">
+            <div id="button_top">
+                团队成员
+                <p><a href="member_add.html">添加</a></p>
+            </div>
+            <div id="button_buttom">
+
+            </div>
+        </div>
+    </div>
+   
+	<script type="text/javascript">
+        $(function(){
+            getData(1);
+        });
+        function getData(page_num){
+            var userJsonStr = sessionStorage.getItem('user');
+            var userEntity = JSON.parse(userJsonStr);
+            var user_id =userEntity.id;
+            var _data="";
+            $.ajax({
+                url:"http://192.168.0.140:8090/api/member/list?user_id="+user_id,
+                type:"get",
+                dataType:"json",
+                data:_data,
+                xhrFields: {withCredentials: true},
+                error:function(){},
+                success:function(result){
+                    if(result.code=200){
+                        initData(result.data);
+                    }
+                }
+            })
+        }
+        function initData(data){
+            var list= data.list;
+            var d_div = ""; 
+            for(var i = 0;i<list.length;i++){
+                d_div +="<div class='button_top' data-id='"+list[i].id +"' >"+
+                            "<div class='button_2'>"+"<a onclick='showActivity(this)'>"+ "修改"+"</a>"+
+                            "<a onclick='delect(this)' >"+ '删除'+"</a>"+"</div>"+
+                            "<div class='button_2'>" + "编号"+ list[i].serial_no+"</div>"+
+                            "<div class='button_2'>"+ "姓名"+ list[i].realname+"</a></div>"+
+                            "<div class='button_2'>"+ "身份证号"+ list[i].id_card+"</div>"+
+                            "<div class='button_2'>"+ "性别"+ list[i].gender.desc+"</div>"+
+                            "<div class='button_2'>"+ "手机号"+ list[i].phone+"</div>"+
+                            "<div class='button_2'>"+ "所属人群"+ list[i].belonging.desc+"</div>"+
+                            "<div class='button_2'>"+ "备注"+ list[i].remark+"</div>"+
+                         "</div>";
+            }
+            $("#button_buttom").html(d_div);
+        }
+
+        // 删除
+        function delect(item){
+            if(confirm("确定要删除吗？")){
+                var id = $(item).closest(".button_top").data("id");
+                var data = "";
+                data += "id=" +id;
+                $.ajax({
+                    url: 'http://192.168.0.140:8090/api/member/delete',
+					type: "post",
+					dataType: "json",
+					cache: false,
+					xhrFields: {
+						withCredentials: true
+					},
+					data: data,
+					success: function (result) {
+						if (result.code == 200) {
+							var tr = $(item).closest(".button_top");
+                            tr.remove();
+                            alert(result.msg);
+						}
+
+					}
+                });
+            }
+        }
+
+        function showActivity(item){
+                window.location.href = "member.result.html?id="+$(item).closest(".button_top").data("id");
+                return;
+            }
+	</script>
+</body>
+</html>
